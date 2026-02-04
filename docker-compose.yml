@@ -28,5 +28,17 @@ services:
       db:
         condition: service_healthy
 
+  migrate:
+    image: migrate/migrate
+    depends_on:
+      - db
+    volumes:
+      - ./migrations:/migrations
+    command: [
+      "-path", "/migrations",
+      "-database", "postgres://postgres:postgres@db:5432/backend_db?sslmode=disable",
+      "up"
+    ]
+
 volumes:
   postgres_data:
