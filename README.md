@@ -142,7 +142,7 @@ Error logs include the specific error message and context to help with debugging
 
 ## Endpoints
 
-Note: We have a Items endpoint which was used for testing purposes only.
+Note: We have an Items endpoint which was used for testing purposes only.
 
 ### Clients
 - `POST /api/clients` - Create new client
