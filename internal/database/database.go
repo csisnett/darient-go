@@ -49,12 +49,43 @@ func InitSchema() error {
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	);`
 
+	banksQuery := `
+	CREATE TABLE IF NOT EXISTS banks (
+		id SERIAL PRIMARY KEY,
+		name VARCHAR(255) NOT NULL,
+		type VARCHAR(20) NOT NULL CHECK (type IN ('PRIVATE', 'GOVERNMENT')),
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);`
+
+	creditsQuery := `
+	CREATE TABLE IF NOT EXISTS credits (
+		id SERIAL PRIMARY KEY,
+		client_id INTEGER NOT NULL REFERENCES clients(id) ON DELETE CASCADE,
+		bank_id INTEGER NOT NULL REFERENCES banks(id) ON DELETE CASCADE,
+		min_payment DECIMAL(15,2) NOT NULL,
+		max_payment DECIMAL(15,2) NOT NULL,
+		term_months INTEGER NOT NULL,
+		credit_type VARCHAR(20) NOT NULL CHECK (credit_type IN ('AUTO', 'MORTGAGE', 'COMMERCIAL')),
+		status VARCHAR(20) NOT NULL DEFAULT 'PENDING' CHECK (status IN ('PENDING', 'APPROVED', 'REJECTED')),
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	);`
+
 	_, err := DB.Exec(itemsQuery)
 	if err != nil {
 		return err
 	}
 
 	_, err = DB.Exec(clientsQuery)
+	if err != nil {
+		return err
+	}
+
+	_, err = DB.Exec(banksQuery)
+	if err != nil {
+		return err
+	}
+
+	_, err = DB.Exec(creditsQuery)
 	if err != nil {
 		return err
 	}
