@@ -142,12 +142,6 @@ Error logs include the specific error message and context to help with debugging
 
 ## Endpoints
 
-### Items
-- `GET /health` - Health check
-- `GET /api/items` - Get all items
-- `GET /api/items/{id}` - Get item by ID
-- `POST /api/items` - Create new item
-
 ### Clients
 - `POST /api/clients` - Create new client
 - `GET /api/clients/{id}` - Get client by ID
@@ -172,11 +166,6 @@ Error logs include the specific error message and context to help with debugging
 
 ## Example Requests
 
-### Create Item
-```bash
-curl -X POST http://localhost:8080/api/items \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test Item","description":"A test item"}'
 ```
 
 ### Create Client
