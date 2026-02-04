@@ -7,12 +7,20 @@ import (
 
 	"backend/internal/database"
 	"backend/internal/handlers"
+	"backend/internal/logger"
+	"backend/internal/middleware"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
 
 func main() {
 	godotenv.Load()
+
+	// Initialize logger
+	if err := logger.Initialize(); err != nil {
+		log.Fatal("Failed to initialize logger:", err)
+	}
+	defer logger.Close()
 
 	databaseURL := os.Getenv("DATABASE_URL")
 	if databaseURL == "" {
@@ -29,6 +37,9 @@ func main() {
 	}
 
 	r := mux.NewRouter()
+	
+	// Add logging middleware to all routes
+	r.Use(middleware.LoggingMiddleware)
 	
 	r.HandleFunc("/health", handlers.HealthCheck).Methods("GET")
 	r.HandleFunc("/api/items", handlers.GetItems).Methods("GET")

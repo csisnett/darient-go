@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"backend/internal/database"
+	"backend/internal/logger"
 	"backend/internal/models"
 	"github.com/gorilla/mux"
 )
@@ -21,6 +22,9 @@ func GetItems(w http.ResponseWriter, r *http.Request) {
 	
 	rows, err := database.DB.Query("SELECT id, name, description, created_at FROM items ORDER BY created_at DESC")
 	if err != nil {
+		if logger.APILogger != nil {
+			logger.APILogger.LogError(r.Method, r.URL.Path, "Database query failed: "+err.Error())
+		}
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(map[string]string{"error": "Database error"})
 		return
@@ -31,6 +35,9 @@ func GetItems(w http.ResponseWriter, r *http.Request) {
 	for rows.Next() {
 		var item models.Item
 		if err := rows.Scan(&item.ID, &item.Name, &item.Description, &item.CreatedAt); err != nil {
+			if logger.APILogger != nil {
+				logger.APILogger.LogError(r.Method, r.URL.Path, "Row scan failed: "+err.Error())
+			}
 			continue
 		}
 		items = append(items, item)
@@ -67,6 +74,9 @@ func CreateItem(w http.ResponseWriter, r *http.Request) {
 	var item models.Item
 	
 	if err := json.NewDecoder(r.Body).Decode(&item); err != nil {
+		if logger.APILogger != nil {
+			logger.APILogger.LogError(r.Method, r.URL.Path, "Invalid JSON in request body: "+err.Error())
+		}
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(map[string]string{"error": "Invalid request"})
 		return
@@ -78,6 +88,9 @@ func CreateItem(w http.ResponseWriter, r *http.Request) {
 	).Scan(&item.ID, &item.CreatedAt)
 
 	if err != nil {
+		if logger.APILogger != nil {
+			logger.APILogger.LogError(r.Method, r.URL.Path, "Failed to insert item: "+err.Error())
+		}
 		w.WriteHeader(http.StatusInternalServerError)
 		json.NewEncoder(w).Encode(map[string]string{"error": "Failed to create item"})
 		return

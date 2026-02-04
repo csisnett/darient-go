@@ -1,0 +1,419 @@
+{
+  "info": {
+    "name": "Backend API Collection",
+    "description": "Collection for testing the backend API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": ["{{baseUrl}}"],
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Items",
+      "item": [
+        {
+          "name": "Get All Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "items"]
+            }
+          }
+        },
+        {
+          "name": "Create Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Item\",\n  \"description\": \"This is a test item\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "items"]
+            }
+          }
+        },
+        {
+          "name": "Get Item by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/items/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "items", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Clients",
+      "item": [
+        {
+          "name": "Create Client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"birth_date\": \"1990-01-01T00:00:00Z\",\n  \"country\": \"USA\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/clients",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "clients"]
+            }
+          }
+        },
+        {
+          "name": "Get Client by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/clients/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "clients", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Client",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"full_name\": \"Jane Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"birth_date\": \"1990-01-01T00:00:00Z\",\n  \"country\": \"Canada\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/clients/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "clients", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Client",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/clients/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "clients", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Banks",
+      "item": [
+        {
+          "name": "Get All Banks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/banks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "banks"]
+            }
+          }
+        },
+        {
+          "name": "Create Bank",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test Bank\",\n  \"type\": \"PRIVATE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/banks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "banks"]
+            }
+          }
+        },
+        {
+          "name": "Get Bank by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/banks/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "banks", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Bank",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Test Bank\",\n  \"type\": \"GOVERNMENT\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/banks/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "banks", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Bank",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/banks/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "banks", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Credits",
+      "item": [
+        {
+          "name": "Get All Credits",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/credits",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "credits"]
+            }
+          }
+        },
+        {
+          "name": "Create Credit",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": 1,\n  \"bank_id\": 1,\n  \"min_payment\": 100.0,\n  \"max_payment\": 1000.0,\n  \"term_months\": 12,\n  \"credit_type\": \"AUTO\",\n  \"status\": \"PENDING\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/credits",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "credits"]
+            }
+          }
+        },
+        {
+          "name": "Get Credit by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/credits/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "credits", "1"]
+            }
+          }
+        },
+        {
+          "name": "Update Credit",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": 1,\n  \"bank_id\": 1,\n  \"min_payment\": 150.0,\n  \"max_payment\": 1500.0,\n  \"term_months\": 24,\n  \"credit_type\": \"MORTGAGE\",\n  \"status\": \"APPROVED\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/credits/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "credits", "1"]
+            }
+          }
+        },
+        {
+          "name": "Delete Credit",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/credits/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "credits", "1"]
+            }
+          }
+        },
+        {
+          "name": "Get Credits by Client",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/clients/1/credits",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "clients", "1", "credits"]
+            }
+          }
+        },
+        {
+          "name": "Get Credits by Bank",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/banks/1/credits",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "banks", "1", "credits"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Error Cases",
+      "item": [
+        {
+          "name": "Invalid Item ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/items/999999",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "items", "999999"]
+            }
+          }
+        },
+        {
+          "name": "Invalid Bank Type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Invalid Bank\",\n  \"type\": \"INVALID_TYPE\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/banks",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "banks"]
+            }
+          }
+        },
+        {
+          "name": "Invalid Credit Type",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client_id\": 1,\n  \"bank_id\": 1,\n  \"min_payment\": 100.0,\n  \"max_payment\": 1000.0,\n  \"term_months\": 12,\n  \"credit_type\": \"INVALID_TYPE\",\n  \"status\": \"PENDING\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/credits",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "credits"]
+            }
+          }
+        },
+        {
+          "name": "Invalid JSON",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"invalid\": json}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/items",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "items"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
